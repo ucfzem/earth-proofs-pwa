@@ -1,0 +1,43 @@
+{
+  "id": "./",
+  "name": "موسوعة الأدلة الكونية | Cosmic Proofs Encyclopedia",
+  "short_name": "Cosmic Proofs",
+  "description": "A multilingual, offline-capable critical study of 200 arguments about Earth's shape and motion.",
+  "lang": "ar",
+  "dir": "auto",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#07101f",
+  "theme_color": "#0d6efd",
+  "categories": ["education", "reference", "books"],
+  "icons": [
+    {
+      "src": "images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "images/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Open the encyclopedia",
+      "short_name": "Open",
+      "url": "./index.html",
+      "icons": [{ "src": "images/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

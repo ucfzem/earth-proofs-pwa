@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="HORIZON &amp; VISIBILITY diagram">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#07101f"/>
+    <stop offset=".55" stop-color="#0b1b31"/>
+    <stop offset="1" stop-color="#102a43"/>
+  </linearGradient>
+  <radialGradient id="glow" cx=".78" cy=".18" r=".8">
+    <stop offset="0" stop-color="#38bdf8" stop-opacity=".30"/>
+    <stop offset=".45" stop-color="#38bdf8" stop-opacity=".08"/>
+    <stop offset="1" stop-color="#38bdf8" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#38bdf8" stop-opacity=".15"/>
+    <stop offset=".5" stop-color="#38bdf8" stop-opacity=".95"/>
+    <stop offset="1" stop-color="#38bdf8" stop-opacity=".15"/>
+  </linearGradient>
+  <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#0e7490" stop-opacity=".75"/>
+    <stop offset="1" stop-color="#082f49" stop-opacity=".95"/>
+  </linearGradient>
+  <filter id="soft"><feGaussianBlur stdDeviation="8"/></filter>
+  <filter id="shadow"><feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#000" flood-opacity=".45"/></filter>
+</defs>
+<rect width="1200" height="675" fill="url(#bg)"/>
+<rect width="1200" height="675" fill="url(#glow)"/>
+<g opacity=".14" stroke="#9dd7f5" stroke-width="1">
+  <path d="M0 135H1200M0 270H1200M0 405H1200M0 540H1200"/>
+  <path d="M150 0V675M300 0V675M450 0V675M600 0V675M750 0V675M900 0V675M1050 0V675"/>
+</g>
+<g fill="#d9f6ff">
+  <circle cx="118" cy="92" r="2.4" opacity=".9"/><circle cx="238" cy="128" r="1.8" opacity=".55"/>
+  <circle cx="1010" cy="82" r="2.2" opacity=".75"/><circle cx="1090" cy="148" r="1.7" opacity=".5"/>
+  <circle cx="880" cy="58" r="1.5" opacity=".45"/><circle cx="360" cy="70" r="1.4" opacity=".4"/>
+</g>
+<g font-family="'Liberation Sans',Arial,sans-serif" fill="#c7ecff">
+  <text x="64" y="66" font-size="18" letter-spacing="4" opacity=".62">EARTH PROOFS</text>
+  <text x="1136" y="66" font-size="17" text-anchor="end" letter-spacing="3" opacity=".48">002</text>
+  <text x="64" y="628" font-size="17" letter-spacing="3" opacity=".5">HORIZON &amp; VISIBILITY</text>
+</g>
+<path d="M64 86H258" stroke="url(#line)" stroke-width="2" stroke-linecap="round" opacity=".8"/>
+
+<circle cx="958" cy="298" r="72" fill="#fbbf24" opacity=".82"/>
+<circle cx="958" cy="298" r="112" fill="#fbbf24" opacity=".09"/>
+<path d="M0 420H1200" stroke="#7dd3fc" stroke-width="4" opacity=".9"/>
+<path d="M0 500C210 472 330 520 512 492s320-18 688 8v175H0Z" fill="#06283d"/>
+<g fill="none" stroke="#67e8f9" stroke-width="3" opacity=".7">
+  <path d="M120 600c200-26 345-8 500 6s300 18 460-2"/>
+  <path d="M98 540c180 6 330-18 505-10s310 22 480 4"/>
+</g>
+<g filter="url(#shadow)" transform="translate(820 344)">
+  <path d="M0 54h150l-20 40H20Z" fill="#e0f2fe"/>
+  <path d="M44 12v42M92 12v42" stroke="#e0f2fe" stroke-width="4"/>
+  <path d="M44 12l48 32" stroke="#e0f2fe" stroke-width="3"/>
+</g>
+<g transform="translate(184 334)" fill="none" stroke="#fbbf24" stroke-width="4" stroke-linecap="round">
+  <path d="M0 0c70-18 140-18 216 0"/>
+  <path d="M-22 0c96-28 196-28 282 0" opacity=".4"/>
+  <path d="M42-18h112" stroke="#fde68a" stroke-dasharray="8 8"/>
+</g>
+<g stroke="#22d3ee" stroke-width="2" opacity=".75" fill="none">
+  <path d="M560 250l220 72M560 250l210 108M560 250l190 146" stroke-dasharray="7 8"/>
+</g>
+<circle cx="560" cy="250" r="14" fill="#22d3ee"/>
+<circle cx="560" cy="250" r="32" fill="none" stroke="#22d3ee" stroke-width="2" opacity=".45"/>
+</svg>

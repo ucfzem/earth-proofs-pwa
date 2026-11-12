@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="SUN, MOON &amp; STARS diagram">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#07101f"/>
+    <stop offset=".55" stop-color="#0b1b31"/>
+    <stop offset="1" stop-color="#102a43"/>
+  </linearGradient>
+  <radialGradient id="glow" cx=".78" cy=".18" r=".8">
+    <stop offset="0" stop-color="#fbbf24" stop-opacity=".30"/>
+    <stop offset=".45" stop-color="#fbbf24" stop-opacity=".08"/>
+    <stop offset="1" stop-color="#fbbf24" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#fbbf24" stop-opacity=".15"/>
+    <stop offset=".5" stop-color="#fbbf24" stop-opacity=".95"/>
+    <stop offset="1" stop-color="#fbbf24" stop-opacity=".15"/>
+  </linearGradient>
+  <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#0e7490" stop-opacity=".75"/>
+    <stop offset="1" stop-color="#082f49" stop-opacity=".95"/>
+  </linearGradient>
+  <filter id="soft"><feGaussianBlur stdDeviation="8"/></filter>
+  <filter id="shadow"><feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#000" flood-opacity=".45"/></filter>
+</defs>
+<rect width="1200" height="675" fill="url(#bg)"/>
+<rect width="1200" height="675" fill="url(#glow)"/>
+<g opacity=".14" stroke="#9dd7f5" stroke-width="1">
+  <path d="M0 135H1200M0 270H1200M0 405H1200M0 540H1200"/>
+  <path d="M150 0V675M300 0V675M450 0V675M600 0V675M750 0V675M900 0V675M1050 0V675"/>
+</g>
+<g fill="#d9f6ff">
+  <circle cx="118" cy="92" r="2.4" opacity=".9"/><circle cx="238" cy="128" r="1.8" opacity=".55"/>
+  <circle cx="1010" cy="82" r="2.2" opacity=".75"/><circle cx="1090" cy="148" r="1.7" opacity=".5"/>
+  <circle cx="880" cy="58" r="1.5" opacity=".45"/><circle cx="360" cy="70" r="1.4" opacity=".4"/>
+</g>
+<g font-family="'Liberation Sans',Arial,sans-serif" fill="#c7ecff">
+  <text x="64" y="66" font-size="18" letter-spacing="4" opacity=".62">EARTH PROOFS</text>
+  <text x="1136" y="66" font-size="17" text-anchor="end" letter-spacing="3" opacity=".48">004</text>
+  <text x="64" y="628" font-size="17" letter-spacing="3" opacity=".5">SUN, MOON &amp; STARS</text>
+</g>
+<path d="M64 86H258" stroke="url(#line)" stroke-width="2" stroke-linecap="round" opacity=".8"/>
+
+<circle cx="250" cy="300" r="92" fill="#fbbf24" opacity=".9"/>
+<circle cx="250" cy="300" r="132" fill="#fbbf24" opacity=".08"/>
+<g fill="#fde68a" opacity=".95">
+  <circle cx="880" cy="160" r="2.5"/><circle cx="950" cy="220" r="2"/><circle cx="1020" cy="140" r="3"/>
+  <circle cx="1080" cy="270" r="2"/><circle cx="820" cy="300" r="1.8"/><circle cx="1100" cy="380" r="2.4"/>
+</g>
+<g transform="translate(690 330)">
+  <circle r="112" fill="#0b1b31" stroke="#67e8f9" stroke-width="2" opacity=".95"/>
+  <path d="M0-112a112 112 0 0 1 0 224 68 112 0 0 0 0-224Z" fill="#e2f7ff" opacity=".95"/>
+  <circle r="112" fill="none" stroke="#22d3ee" stroke-width="1" opacity=".35"/>
+</g>
+<g fill="none" stroke="#a78bfa" stroke-width="2" opacity=".75">
+  <ellipse cx="690" cy="420" rx="190" ry="54" stroke-dasharray="6 10"/>
+  <ellipse cx="690" cy="420" rx="250" ry="88" stroke-dasharray="3 12" opacity=".35"/>
+</g>
+<g fill="#67e8f9" opacity=".8">
+  <circle cx="880" cy="404" r="5"/><circle cx="512" cy="446" r="4"/><circle cx="690" cy="508" r="3"/>
+</g>
+<path d="M342 300h236" stroke="#fbbf24" stroke-width="3" stroke-dasharray="10 12" opacity=".65"/>
+<g stroke="#fde68a" stroke-width="2" fill="none" opacity=".8">
+  <path d="M390 270l40 30-40 30M435 270l40 30-40 30"/>
+</g>
+</svg>

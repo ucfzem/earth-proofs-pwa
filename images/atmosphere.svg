@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="AIR &amp; PRESSURE diagram">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#07101f"/>
+    <stop offset=".55" stop-color="#0b1b31"/>
+    <stop offset="1" stop-color="#102a43"/>
+  </linearGradient>
+  <radialGradient id="glow" cx=".78" cy=".18" r=".8">
+    <stop offset="0" stop-color="#34d399" stop-opacity=".30"/>
+    <stop offset=".45" stop-color="#34d399" stop-opacity=".08"/>
+    <stop offset="1" stop-color="#34d399" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#34d399" stop-opacity=".15"/>
+    <stop offset=".5" stop-color="#34d399" stop-opacity=".95"/>
+    <stop offset="1" stop-color="#34d399" stop-opacity=".15"/>
+  </linearGradient>
+  <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#0e7490" stop-opacity=".75"/>
+    <stop offset="1" stop-color="#082f49" stop-opacity=".95"/>
+  </linearGradient>
+  <filter id="soft"><feGaussianBlur stdDeviation="8"/></filter>
+  <filter id="shadow"><feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#000" flood-opacity=".45"/></filter>
+</defs>
+<rect width="1200" height="675" fill="url(#bg)"/>
+<rect width="1200" height="675" fill="url(#glow)"/>
+<g opacity=".14" stroke="#9dd7f5" stroke-width="1">
+  <path d="M0 135H1200M0 270H1200M0 405H1200M0 540H1200"/>
+  <path d="M150 0V675M300 0V675M450 0V675M600 0V675M750 0V675M900 0V675M1050 0V675"/>
+</g>
+<g fill="#d9f6ff">
+  <circle cx="118" cy="92" r="2.4" opacity=".9"/><circle cx="238" cy="128" r="1.8" opacity=".55"/>
+  <circle cx="1010" cy="82" r="2.2" opacity=".75"/><circle cx="1090" cy="148" r="1.7" opacity=".5"/>
+  <circle cx="880" cy="58" r="1.5" opacity=".45"/><circle cx="360" cy="70" r="1.4" opacity=".4"/>
+</g>
+<g font-family="'Liberation Sans',Arial,sans-serif" fill="#c7ecff">
+  <text x="64" y="66" font-size="18" letter-spacing="4" opacity=".62">EARTH PROOFS</text>
+  <text x="1136" y="66" font-size="17" text-anchor="end" letter-spacing="3" opacity=".48">005</text>
+  <text x="64" y="628" font-size="17" letter-spacing="3" opacity=".5">AIR &amp; PRESSURE</text>
+</g>
+<path d="M64 86H258" stroke="url(#line)" stroke-width="2" stroke-linecap="round" opacity=".8"/>
+
+<circle cx="600" cy="330" r="178" fill="#06283d" stroke="#5eead4" stroke-width="3"/>
+<g fill="none" stroke="#5eead4" opacity=".55">
+  <circle cx="600" cy="330" r="218" stroke-width="2" stroke-dasharray="10 12"/>
+  <circle cx="600" cy="330" r="262" stroke-width="1.5" stroke-dasharray="4 14"/>
+  <circle cx="600" cy="330" r="306" stroke-width="1" stroke-dasharray="2 16"/>
+</g>
+<path d="M600 152a178 178 0 0 1 0 356" fill="none" stroke="#a7f3d0" stroke-width="2" opacity=".4"/>
+<g stroke="#fbbf24" stroke-width="3" fill="none" opacity=".9">
+  <path d="M850 440l80-40M850 482l100-12M850 524l80 40"/>
+  <path d="M930 400l14 0-10-8M950 470l14 0-10-8M930 564l14 0-10 8"/>
+</g>
+<g stroke="#5eead4" stroke-width="2" opacity=".6" fill="none">
+  <path d="M250 360c60-30 120 30 180 0s120 30 180 0"/>
+  <path d="M210 420c60-30 120 30 180 0s120 30 180 0"/>
+  <path d="M250 480c60-30 120 30 180 0s120 30 180 0"/>
+</g>
+<g fill="#a7f3d0" opacity=".9">
+  <circle cx="390" cy="228" r="4"/><circle cx="452" cy="196" r="3"/><circle cx="516" cy="232" r="4"/>
+</g>
+<path d="M360 556c100-18 200-18 300 0" stroke="#34d399" stroke-width="4" fill="none" opacity=".7"/>
+</svg>

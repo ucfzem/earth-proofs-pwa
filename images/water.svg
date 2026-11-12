@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="WATER &amp; LEVEL diagram">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#07101f"/>
+    <stop offset=".55" stop-color="#0b1b31"/>
+    <stop offset="1" stop-color="#102a43"/>
+  </linearGradient>
+  <radialGradient id="glow" cx=".78" cy=".18" r=".8">
+    <stop offset="0" stop-color="#22d3ee" stop-opacity=".30"/>
+    <stop offset=".45" stop-color="#22d3ee" stop-opacity=".08"/>
+    <stop offset="1" stop-color="#22d3ee" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#22d3ee" stop-opacity=".15"/>
+    <stop offset=".5" stop-color="#22d3ee" stop-opacity=".95"/>
+    <stop offset="1" stop-color="#22d3ee" stop-opacity=".15"/>
+  </linearGradient>
+  <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#0e7490" stop-opacity=".75"/>
+    <stop offset="1" stop-color="#082f49" stop-opacity=".95"/>
+  </linearGradient>
+  <filter id="soft"><feGaussianBlur stdDeviation="8"/></filter>
+  <filter id="shadow"><feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#000" flood-opacity=".45"/></filter>
+</defs>
+<rect width="1200" height="675" fill="url(#bg)"/>
+<rect width="1200" height="675" fill="url(#glow)"/>
+<g opacity=".14" stroke="#9dd7f5" stroke-width="1">
+  <path d="M0 135H1200M0 270H1200M0 405H1200M0 540H1200"/>
+  <path d="M150 0V675M300 0V675M450 0V675M600 0V675M750 0V675M900 0V675M1050 0V675"/>
+</g>
+<g fill="#d9f6ff">
+  <circle cx="118" cy="92" r="2.4" opacity=".9"/><circle cx="238" cy="128" r="1.8" opacity=".55"/>
+  <circle cx="1010" cy="82" r="2.2" opacity=".75"/><circle cx="1090" cy="148" r="1.7" opacity=".5"/>
+  <circle cx="880" cy="58" r="1.5" opacity=".45"/><circle cx="360" cy="70" r="1.4" opacity=".4"/>
+</g>
+<g font-family="'Liberation Sans',Arial,sans-serif" fill="#c7ecff">
+  <text x="64" y="66" font-size="18" letter-spacing="4" opacity=".62">EARTH PROOFS</text>
+  <text x="1136" y="66" font-size="17" text-anchor="end" letter-spacing="3" opacity=".48">001</text>
+  <text x="64" y="628" font-size="17" letter-spacing="3" opacity=".5">WATER &amp; LEVEL</text>
+</g>
+<path d="M64 86H258" stroke="url(#line)" stroke-width="2" stroke-linecap="round" opacity=".8"/>
+
+<g filter="url(#shadow)">
+  <circle cx="930" cy="178" r="58" fill="#fbbf24" opacity=".92"/>
+  <circle cx="930" cy="178" r="86" fill="#fbbf24" opacity=".12"/>
+</g>
+<path d="M0 402C180 388 330 414 505 400s330-18 695 4v271H0Z" fill="url(#water)"/>
+<path d="M0 402C180 388 330 414 505 400s330-18 695 4" fill="none" stroke="#67e8f9" stroke-width="5" opacity=".9"/>
+<path d="M0 456C210 436 360 474 560 452s370-10 640 8M0 518C220 498 390 534 610 512s350-6 590 12" fill="none" stroke="#bff4ff" stroke-width="2" opacity=".22"/>
+<g filter="url(#shadow)">
+  <path d="M765 374h170l-26 52H791Z" fill="#e2f7ff"/>
+  <path d="M812 322v52M858 322v52" stroke="#e2f7ff" stroke-width="4"/>
+  <path d="M812 322l46 34" stroke="#e2f7ff" stroke-width="3" opacity=".8"/>
+  <circle cx="850" cy="347" r="7" fill="#22d3ee"/>
+</g>
+<path d="M90 286H1060" stroke="#fbbf24" stroke-width="3" stroke-dasharray="12 10" opacity=".9"/>
+<g fill="#fde68a"><circle cx="90" cy="286" r="7"/><circle cx="1060" cy="286" r="7"/></g>
+<text x="92" y="266" font-family="'Liberation Sans',Arial,sans-serif" font-size="20" fill="#fde68a" letter-spacing="2">LEVEL</text>
+<g stroke="#22d3ee" stroke-width="3" opacity=".8" fill="none">
+  <path d="M150 352c170-28 330-30 500-8"/>
+  <path d="M690 344c160-22 300-20 430 0"/>
+</g>
+</svg>

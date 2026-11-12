@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>موسوعة الأدلة الكونية | Cosmic Proofs Encyclopedia</title>
+  <meta name="description" content="موسوعة رقمية متعددة اللغات تعرض 200 حجة حول شكل الأرض وحركتها، مع سياق علمي وتحليلي، وبحث فوري وتصنيفات وعمل كامل دون اتصال.">
+  <meta property="og:title" content="موسوعة الأدلة الكونية | Cosmic Proofs Encyclopedia">
+  <meta property="og:description" content="200 arguments about Earth's shape and motion, in Arabic, English, French, and Spanish, with scientific notes and offline support.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ucfzem.github.io/earth-proofs-pwa/">
+  <meta property="og:image" content="https://ucfzem.github.io/earth-proofs-pwa/images/icon-512.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#0d6efd">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="apple-touch-icon" href="./images/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Cosmic Proofs">
+  <link rel="stylesheet" href="./style.css">
+  <script>
+    (function () {
+      var theme = "light";
+      var lang = "ar";
+      try {
+        theme = localStorage.getItem("app_theme") ||
+          (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        var saved = localStorage.getItem("app_lang");
+        var browser = (navigator.language || "ar").slice(0, 2).toLowerCase();
+        lang = saved || (["ar", "en", "fr", "es"].indexOf(browser) !== -1 ? browser : "ar");
+      } catch (e) {}
+      document.documentElement.setAttribute("data-theme", theme);
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+    })();
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#cardsGrid" data-i18n="readMore">اقرأ التحليل</a>
+
+  <header>
+    <div class="header-container">
+      <div class="brand-title">
+        <h1 data-i18n="title">موسوعة الأدلة الكونية</h1>
+        <p data-i18n="subtitle">قراءة تحليلية لـ 200 حجة حول شكل الأرض وحركتها</p>
+      </div>
+
+      <div class="header-controls">
+        <span id="connectionStatus" class="status-badge online" role="status" aria-live="polite">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span data-i18n="online">متصل</span>
+        </span>
+
+        <label class="sr-only" for="langSelector" data-i18n="language">اللغة</label>
+        <select id="langSelector">
+          <option value="ar">العربية</option>
+          <option value="en">English</option>
+          <option value="fr">Français</option>
+          <option value="es">Español</option>
+        </select>
+
+        <button id="themeToggle" class="icon-btn" type="button" aria-label="تبديل الوضع الليلي">🌙</button>
+
+        <button id="downloadImagesBtn" class="primary-btn" type="button" data-i18n="downloadImagesBtn">تحميل الصور للعمل دون اتصال</button>
+      </div>
+    </div>
+
+    <div id="downloadStatus" class="download-status" role="status" aria-live="polite" hidden>
+      <span id="downloadStatusText"></span>
+      <span class="download-track" aria-hidden="true"><span id="downloadFill"></span></span>
+    </div>
+  </header>
+
+  <div class="disclaimer-banner" role="note">
+    <p data-i18n="disclaimer">محتوى تعليمي وتحليلي لأغراض البحث والنقاش الفكري.</p>
+  </div>
+
+  <section class="search-filter-section" aria-label="Search and filters">
+    <input type="search" id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="ابحث برقم الدليل أو العنوان أو الكلمة المفتاحية..." autocomplete="off">
+    <div class="search-meta">
+      <span id="resultsMeta" role="status" aria-live="polite"></span>
+      <button id="clearSearchBtn" class="text-btn" type="button" data-i18n="clearSearch" hidden>مسح البحث</button>
+    </div>
+    <div id="categoriesContainer" class="categories-container" role="group"></div>
+  </section>
+
+  <main>
+    <div id="cardsGrid" class="cards-grid" aria-live="polite"></div>
+    <div id="emptyState" class="no-results" hidden data-i18n="noResults">لا توجد نتائج مطابقة.</div>
+  </main>
+
+  <footer>
+    <p><strong data-i18n="title">موسوعة الأدلة الكونية</strong> — <span data-i18n="sourceNote">الملخصات الأصلية لهذا الفهرس صيغت للدراسة النقدية.</span></p>
+    <p data-i18n="footerNote">أُعدّ هذا الفهرس كأداة دراسة نقدية.</p>
+    <p class="footer-meta"><span data-i18n="installHint">يمكن تثبيت التطبيق من قائمة المتصفح.</span> · <span class="app-version">v1.0.0</span></p>
+  </footer>
+
+  <div id="proofModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+    <div class="modal-content" tabindex="-1">
+      <div class="modal-header">
+        <div>
+          <span id="modalKicker" class="modal-kicker"></span>
+          <h2 id="modalTitle">عنوان الدليل</h2>
+        </div>
+        <button id="modalClose" class="close-btn" type="button" aria-label="إغلاق" data-i18n="closeModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <img id="modalImage" src="" alt="" loading="lazy" decoding="async">
+        <div class="modal-section">
+          <h3 data-i18n="claimLabel">الحجة المعروضة</h3>
+          <p id="modalContent"></p>
+        </div>
+        <div class="modal-section scientific-note">
+          <h3 data-i18n="scientificNoteTitle">الملاحظة العلمية</h3>
+          <p id="modalScientificNote"></p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="prevCardBtn" class="primary-btn" type="button" data-i18n="prevCard">السابق</button>
+        <span id="modalCounter" class="modal-counter"></span>
+        <button id="nextCardBtn" class="primary-btn" type="button" data-i18n="nextCard">التالي</button>
+      </div>
+    </div>
+  </div>
+
+  <noscript>
+    <p style="padding:1rem;text-align:center">This application requires JavaScript to display the 200 entries.</p>
+  </noscript>
+
+  <script src="./translations.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
