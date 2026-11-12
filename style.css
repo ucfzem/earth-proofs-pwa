@@ -1,47 +1,63 @@
-/* --- Theme tokens --- */
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap');
+
+/* --- Nuzhat al-Mushtaq theme tokens --- */
 :root {
-  --bg-color: #f4f7fb;
-  --card-bg: #ffffff;
-  --text-color: #162033;
-  --text-muted: #5d6b82;
-  --primary-color: #0d6efd;
-  --primary-hover: #0b5ed7;
-  --accent-color: #f59e0b;
-  --border-color: #dbe3ef;
-  --shadow: 0 10px 30px rgba(22, 32, 51, 0.08);
-  --shadow-strong: 0 22px 60px rgba(22, 32, 51, 0.24);
-  --badge-bg: rgba(10, 20, 38, 0.82);
-  --badge-text: #ffffff;
-  --overlay: rgba(7, 13, 25, 0.68);
-  --focus: 0 0 0 4px rgba(13, 110, 253, 0.22);
+  --bg-color: #0e1116;
+  --surface-color: #161b22;
+  --card-bg: #161b22;
+  --card-hover: #1d232c;
+  --border-color: #2b323d;
+  --border-accent: rgba(212, 175, 55, 0.35);
+  --text-color: #e6e1d6;
+  --text-muted: #9aa0a6;
+  --primary-color: #d4af37;
+  --primary-hover: #e5c158;
+  --primary-text: #0e1116;
+  --accent-emerald: #2ea043;
+  --accent-color: var(--accent-emerald);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.65);
+  --shadow: var(--shadow-sm);
+  --shadow-strong: var(--shadow-lg);
+  --badge-bg: rgba(14, 17, 22, 0.88);
+  --badge-text: #e6e1d6;
+  --overlay: rgba(5, 7, 10, 0.78);
+  --focus: 0 0 0 4px rgba(212, 175, 55, 0.28);
   --radius: 16px;
   --header-height: auto;
-  --font-latin: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
-  --font-arabic: "Segoe UI", Tahoma, "Noto Naskh Arabic", "Noto Sans Arabic", "Amiri", system-ui, sans-serif;
-  --fs-body: clamp(0.95rem, 2.5vw, 1.05rem);
-  --fs-h1: clamp(1.15rem, 4vw, 1.5rem);
-  --fs-card-title: clamp(0.95rem, 3vw, 1.1rem);
+  --font-arabic: 'Amiri', 'Traditional Arabic', Georgia, serif;
+  --font-latin: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+  --fs-body: clamp(1rem, 2.5vw, 1.125rem);
+  --fs-h1: clamp(1.2rem, 4vw, 1.55rem);
+  --fs-card-title: clamp(1.05rem, 3vw, 1.2rem);
   --fs-modal-title: clamp(1.05rem, 3.5vw, 1.3rem);
   --space-container: clamp(0.85rem, 3vw, 1.5rem);
   --space-card: clamp(0.85rem, 2.5vw, 1.25rem);
   --gap-grid: clamp(0.85rem, 3vw, 1.5rem);
 }
 
-[data-theme="dark"] {
-  --bg-color: #0b1119;
-  --card-bg: #151d28;
-  --text-color: #edf3fb;
-  --text-muted: #a6b5c9;
-  --primary-color: #4f9cff;
-  --primary-hover: #74b1ff;
-  --accent-color: #fbbf24;
-  --border-color: #263448;
-  --shadow: 0 12px 34px rgba(0, 0, 0, 0.32);
-  --shadow-strong: 0 28px 70px rgba(0, 0, 0, 0.56);
-  --badge-bg: rgba(4, 8, 16, 0.9);
-  --badge-text: #ffffff;
-  --overlay: rgba(0, 0, 0, 0.76);
-  --focus: 0 0 0 4px rgba(79, 156, 255, 0.25);
+[data-theme="light"] {
+  --bg-color: #f7f4eb;
+  --surface-color: #efeadd;
+  --card-bg: #fcfaf4;
+  --card-hover: #f3eee1;
+  --border-color: #dcd4c0;
+  --border-accent: rgba(154, 114, 24, 0.35);
+  --text-color: #231f1a;
+  --text-muted: #665e52;
+  --primary-color: #9a7218;
+  --primary-hover: #7d5b10;
+  --primary-text: #ffffff;
+  --accent-emerald: #1e7e34;
+  --accent-color: var(--accent-emerald);
+  --shadow-sm: 0 2px 8px rgba(35, 31, 26, 0.08);
+  --shadow-lg: 0 12px 32px rgba(35, 31, 26, 0.16);
+  --shadow: var(--shadow-sm);
+  --shadow-strong: var(--shadow-lg);
+  --badge-bg: rgba(35, 31, 26, 0.82);
+  --badge-text: #fcfaf4;
+  --overlay: rgba(35, 31, 26, 0.46);
+  --focus: 0 0 0 4px rgba(154, 114, 24, 0.25);
 }
 
 * {
@@ -59,8 +75,8 @@ body {
   display: flex;
   flex-direction: column;
   background:
-    radial-gradient(circle at 12% -8%, rgba(13, 110, 253, 0.12), transparent 32rem),
-    radial-gradient(circle at 88% 0%, rgba(245, 158, 11, 0.1), transparent 28rem),
+    radial-gradient(circle at 12% -8%, color-mix(in srgb, var(--primary-color) 12%, transparent), transparent 32rem),
+    radial-gradient(circle at 88% 0%, color-mix(in srgb, var(--accent-emerald) 8%, transparent), transparent 28rem),
     var(--bg-color);
   color: var(--text-color);
   font-family: var(--font-latin);
@@ -71,13 +87,23 @@ body {
 
 [dir="rtl"] body {
   font-family: var(--font-arabic);
-  font-size: calc(var(--fs-body) * 1.04);
-  line-height: 1.8;
+  font-size: calc(var(--fs-body) * 1.12);
+  line-height: 1.85;
   letter-spacing: 0;
 }
 
 [dir="ltr"] body {
+  font-family: var(--font-latin);
+  font-size: var(--fs-body);
+  line-height: 1.6;
   letter-spacing: -0.005em;
+}
+
+.lang-btn,
+.drawer-item-num,
+.proof-badge,
+.status-badge {
+  font-family: var(--font-latin);
 }
 
 [dir="rtl"] .brand-title h1,
@@ -148,7 +174,7 @@ a {
   padding: 0.7rem 1rem;
   border-radius: 0 0 10px 10px;
   background: var(--primary-color);
-  color: #fff;
+  color: var(--primary-text);
   text-decoration: none;
   transition: top 0.2s ease;
 }
@@ -229,7 +255,8 @@ header {
 .lang-btn.active {
   background: var(--primary-color);
   border-color: var(--primary-color);
-  color: #ffffff;
+  color: var(--primary-text);
+  font-weight: 700;
   box-shadow: 0 2px 6px color-mix(in srgb, var(--primary-color) 25%, transparent);
 }
 
@@ -259,23 +286,23 @@ header {
 }
 
 .status-badge.online {
+  background: #123524;
+  color: #7ee2a8;
+}
+
+.status-badge.offline {
+  background: #3b1717;
+  color: #fca5a5;
+}
+
+[data-theme="light"] .status-badge.online {
   background: #d9fbe8;
   color: #065f46;
 }
 
-.status-badge.offline {
+[data-theme="light"] .status-badge.offline {
   background: #fee2e2;
   color: #991b1b;
-}
-
-[data-theme="dark"] .status-badge.online {
-  background: #063c2c;
-  color: #6ee7b7;
-}
-
-[data-theme="dark"] .status-badge.offline {
-  background: #491414;
-  color: #fca5a5;
 }
 
 .status-dot {
@@ -324,14 +351,14 @@ button:hover {
 
 .primary-btn {
   border: 0;
-  background: linear-gradient(135deg, var(--primary-color), color-mix(in srgb, var(--primary-color) 65%, #7c3aed));
-  color: #fff;
+  background: linear-gradient(135deg, var(--primary-color), color-mix(in srgb, var(--primary-color) 82%, #8a5a00));
+  color: var(--primary-text);
   font-weight: 700;
   box-shadow: 0 8px 18px color-mix(in srgb, var(--primary-color) 24%, transparent);
 }
 
 .primary-btn:hover {
-  background: linear-gradient(135deg, var(--primary-hover), color-mix(in srgb, var(--primary-hover) 65%, #7c3aed));
+  background: linear-gradient(135deg, var(--primary-hover), color-mix(in srgb, var(--primary-hover) 82%, #8a5a00));
   transform: translateY(-1px);
 }
 
@@ -413,14 +440,6 @@ button:hover {
   font-size: 0.84rem;
 }
 
-.text-btn {
-  border: 0;
-  background: transparent;
-  color: var(--primary-color);
-  padding: 0.15rem 0.2rem;
-  font-weight: 700;
-}
-
 .categories-container {
   display: flex;
   gap: 0.5rem;
@@ -448,7 +467,8 @@ button:hover {
 .category-pill.active {
   background: var(--primary-color);
   border-color: var(--primary-color);
-  color: #fff;
+  color: var(--primary-text);
+  font-weight: 700;
   box-shadow: 0 7px 16px color-mix(in srgb, var(--primary-color) 26%, transparent);
 }
 
@@ -482,7 +502,8 @@ main {
 .proof-card:hover,
 .proof-card:focus-visible {
   transform: translateY(-4px);
-  border-color: color-mix(in srgb, var(--primary-color) 50%, var(--border-color));
+  border-color: var(--border-accent);
+  background: var(--card-hover);
   box-shadow: var(--shadow-strong);
 }
 
@@ -697,17 +718,32 @@ footer p + p {
   line-height: 1.4;
 }
 
-.close-btn {
+.close-btn,
+#clearSearchBtn {
   flex: 0 0 auto;
-  width: 2.2rem;
-  height: 2.2rem;
-  display: inline-grid;
-  place-items: center;
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 0;
-  border-radius: 999px;
   border: 1px solid var(--border-color);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: var(--font-latin);
   font-size: 1.35rem;
   line-height: 1;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.close-btn:hover,
+#clearSearchBtn:hover {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+  background: color-mix(in srgb, var(--primary-color) 10%, transparent);
 }
 
 .modal-body {
@@ -864,7 +900,7 @@ footer p + p {
   padding: 0.2rem 0.4rem;
   border-radius: 5px;
   background: var(--primary-color);
-  color: #ffffff;
+  color: var(--primary-text);
   font-size: 0.72rem;
   font-weight: 800;
   line-height: 1.3;

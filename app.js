@@ -151,7 +151,7 @@ function applyTheme() {
     els.themeToggle.setAttribute("title", state.theme === "dark" ? t("themeLight") : t("themeDark"));
   }
   const meta = document.querySelector('meta[name="theme-color"]');
-  if (meta) meta.setAttribute("content", state.theme === "dark" ? "#0b1119" : "#0d6efd");
+  if (meta) meta.setAttribute("content", state.theme === "dark" ? "#0e1116" : "#f7f4eb");
 }
 
 function applyLanguage(lang, persist) {
@@ -188,7 +188,18 @@ function applyTranslations() {
   }
   if (els.proofsDrawer) els.proofsDrawer.setAttribute("aria-label", t("indexAria"));
   if (els.drawerSearchInput) els.drawerSearchInput.setAttribute("aria-label", t("indexSearchPlaceholder"));
-  if (els.drawerClose) els.drawerClose.setAttribute("aria-label", t("closeModal"));
+  if (els.drawerClose) {
+    els.drawerClose.setAttribute("aria-label", t("closeAria"));
+    els.drawerClose.setAttribute("title", t("closeAria"));
+  }
+  if (els.modalClose) {
+    els.modalClose.setAttribute("aria-label", t("closeAria"));
+    els.modalClose.setAttribute("title", t("closeAria"));
+  }
+  if (els.clearSearchBtn) {
+    els.clearSearchBtn.setAttribute("aria-label", t("clearSearch"));
+    els.clearSearchBtn.setAttribute("title", t("clearSearch"));
+  }
   if (els.emptyState && !els.emptyState.hidden) els.emptyState.textContent = t("noResults");
 
   updateConnection();
@@ -730,7 +741,7 @@ function init() {
 
   let savedTheme = null;
   try { savedTheme = localStorage.getItem(THEME_KEY); } catch (e) {}
-  state.theme = savedTheme || document.documentElement.getAttribute("data-theme") || "light";
+  state.theme = savedTheme || document.documentElement.getAttribute("data-theme") || "dark";
   state.lang = document.documentElement.lang && LANGS.indexOf(document.documentElement.lang) !== -1
     ? document.documentElement.lang
     : "ar";

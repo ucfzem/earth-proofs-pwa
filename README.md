@@ -17,8 +17,10 @@ A multilingual, offline-capable critical-study index of 200 arguments about Eart
 - Category filtering
 - Hamburger index drawer for all 200 proofs with instant filtering
 - Accessible detail modal with previous/next navigation
-- Light and dark themes
-- Installable PWA with offline caching
+- Nuzhat al-Mushtaq dark/light manuscript palette
+- Amiri Arabic reading font paired with Inter UI typography
+- Minimal × icon close buttons
+- Installable PWA with offline caching, including font caching after the first controlled load
 - Original SVG diagrams for every strand
 - Responsive layout with RTL support
 

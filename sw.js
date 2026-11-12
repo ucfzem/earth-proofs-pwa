@@ -1,4 +1,4 @@
-const CACHE = "earth-proofs-shell-v1.3.0";
+const CACHE = "earth-proofs-shell-v1.4.0";
 const SCOPE = self.registration.scope;
 
 const APP_SHELL = [
@@ -82,7 +82,7 @@ async function staleWhileRevalidate(request) {
   const cached = await caches.match(request);
   const network = fetch(request)
     .then(async (response) => {
-      if (response && response.ok) {
+      if (response && (response.ok || response.type === "opaque")) {
         const cache = await caches.open(CACHE);
         cache.put(request, response.clone());
       }
@@ -97,6 +97,10 @@ self.addEventListener("fetch", (event) => {
   if (request.method !== "GET") return;
 
   const url = new URL(request.url);
+  if (url.hostname === "fonts.googleapis.com" || url.hostname === "fonts.gstatic.com") {
+    event.respondWith(staleWhileRevalidate(request));
+    return;
+  }
   if (url.origin !== self.location.origin) return;
 
   if (request.mode === "navigate") {
