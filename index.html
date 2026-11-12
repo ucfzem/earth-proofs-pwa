@@ -24,11 +24,10 @@
       var theme = "light";
       var lang = "ar";
       try {
-        theme = localStorage.getItem("app_theme") ||
+        theme = localStorage.getItem("earth-proofs-theme") ||
           (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-        var saved = localStorage.getItem("app_lang");
-        var browser = (navigator.language || "ar").slice(0, 2).toLowerCase();
-        lang = saved || (["ar", "en", "fr", "es"].indexOf(browser) !== -1 ? browser : "ar");
+        var saved = localStorage.getItem("earth-proofs-lang");
+        lang = ["ar", "en", "fr", "es"].indexOf(saved) !== -1 ? saved : "ar";
       } catch (e) {}
       document.documentElement.setAttribute("data-theme", theme);
       document.documentElement.lang = lang;

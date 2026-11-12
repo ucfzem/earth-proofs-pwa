@@ -16,6 +16,15 @@
   --focus: 0 0 0 4px rgba(13, 110, 253, 0.22);
   --radius: 16px;
   --header-height: auto;
+  --font-latin: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+  --font-arabic: "Segoe UI", Tahoma, "Noto Naskh Arabic", "Noto Sans Arabic", "Amiri", system-ui, sans-serif;
+  --fs-body: clamp(0.95rem, 2.5vw, 1.05rem);
+  --fs-h1: clamp(1.15rem, 4vw, 1.5rem);
+  --fs-card-title: clamp(0.95rem, 3vw, 1.1rem);
+  --fs-modal-title: clamp(1.05rem, 3.5vw, 1.3rem);
+  --space-container: clamp(0.85rem, 3vw, 1.5rem);
+  --space-card: clamp(0.85rem, 2.5vw, 1.25rem);
+  --gap-grid: clamp(0.85rem, 3vw, 1.5rem);
 }
 
 [data-theme="dark"] {
@@ -54,14 +63,36 @@ body {
     radial-gradient(circle at 88% 0%, rgba(245, 158, 11, 0.1), transparent 28rem),
     var(--bg-color);
   color: var(--text-color);
-  font-family: "Segoe UI", Tahoma, "Noto Sans Arabic", "Noto Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-latin);
+  font-size: var(--fs-body);
   line-height: 1.65;
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-html[lang="ar"] body {
-  font-family: "Segoe UI", Tahoma, "Noto Naskh Arabic", "Noto Sans Arabic", "Amiri", system-ui, sans-serif;
-  line-height: 1.85;
+[dir="rtl"] body {
+  font-family: var(--font-arabic);
+  font-size: calc(var(--fs-body) * 1.04);
+  line-height: 1.8;
+  letter-spacing: 0;
+}
+
+[dir="ltr"] body {
+  letter-spacing: -0.005em;
+}
+
+[dir="rtl"] .brand-title h1,
+[dir="rtl"] .card-body h3,
+[dir="rtl"] .modal-header h2 {
+  letter-spacing: 0;
+}
+
+[dir="rtl"] .card-body h3 {
+  line-height: 1.55;
+}
+
+[dir="rtl"] .card-body p,
+[dir="rtl"] #modalContent {
+  line-height: 1.8;
 }
 
 img {
@@ -139,7 +170,7 @@ header {
 .header-container {
   width: min(1240px, 100%);
   margin: 0 auto;
-  padding: 1rem 1.5rem;
+  padding: 1rem var(--space-container);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -148,7 +179,7 @@ header {
 }
 
 .brand-title h1 {
-  font-size: clamp(1.15rem, 2.4vw, 1.5rem);
+  font-size: var(--fs-h1);
   font-weight: 800;
   letter-spacing: -0.015em;
   line-height: 1.3;
@@ -299,7 +330,7 @@ button:hover {
 .search-filter-section {
   width: min(1240px, 100%);
   margin: 0 auto;
-  padding: 1.4rem 1.5rem 1rem;
+  padding: 1.4rem var(--space-container) 1rem;
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
@@ -374,13 +405,13 @@ main {
   flex: 1;
   width: min(1240px, 100%);
   margin: 0 auto;
-  padding: 0 1.5rem 2.5rem;
+  padding: 0 var(--space-container) 2.5rem;
 }
 
 .cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-  gap: 1.15rem;
+  gap: var(--gap-grid);
 }
 
 .proof-card {
@@ -483,11 +514,11 @@ main {
   display: flex;
   flex-direction: column;
   gap: 0.45rem;
-  padding: 0.95rem 1rem 1.05rem;
+  padding: var(--space-card);
 }
 
 .card-body h3 {
-  font-size: 0.98rem;
+  font-size: var(--fs-card-title);
   font-weight: 750;
   line-height: 1.45;
 }
@@ -610,7 +641,7 @@ footer p + p {
 }
 
 .modal-header h2 {
-  font-size: clamp(1rem, 2.8vw, 1.25rem);
+  font-size: var(--fs-modal-title);
   line-height: 1.4;
 }
 
@@ -656,6 +687,11 @@ footer p + p {
   font-size: 0.94rem;
 }
 
+#modalContent {
+  font-size: clamp(1rem, 2.6vw, 1.05rem);
+  line-height: 1.75;
+}
+
 .scientific-note {
   padding: 0.9rem 1rem;
   border-radius: 10px;
@@ -696,16 +732,26 @@ footer p + p {
 
 @media (max-width: 760px) {
   .header-container {
+    padding-block: 0.75rem;
     align-items: flex-start;
+    gap: 0.6rem;
   }
 
   .header-controls {
     width: 100%;
     justify-content: flex-start;
+    gap: 0.45rem;
+  }
+
+  .status-badge {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.74rem;
   }
 
   #downloadImagesBtn {
     flex: 1 1 100%;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.82rem;
   }
 
   .cards-grid {
@@ -718,11 +764,12 @@ footer p + p {
   .search-filter-section,
   main,
   footer {
-    padding-inline: 1rem;
+    padding-inline: var(--space-container);
   }
 
   .brand-title p {
     font-size: 0.8rem;
+    line-height: 1.5;
   }
 
   .status-badge {
@@ -732,6 +779,21 @@ footer p + p {
   #langSelector,
   #themeToggle {
     order: 1;
+  }
+
+  #downloadImagesBtn {
+    order: 2;
+  }
+
+  #langSelector {
+    max-width: 7.2rem;
+    padding: 0.45rem 0.55rem;
+    font-size: 0.88rem;
+  }
+
+  .icon-btn {
+    width: 2.35rem;
+    height: 2.35rem;
   }
 
   .cards-grid {

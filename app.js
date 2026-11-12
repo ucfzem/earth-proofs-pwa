@@ -1,8 +1,8 @@
 "use strict";
 
 const LANGS = ["ar", "en", "fr", "es"];
-const LANG_KEY = "app_lang";
-const THEME_KEY = "app_theme";
+const LANG_KEY = "earth-proofs-lang";
+const THEME_KEY = "earth-proofs-theme";
 const IMAGE_CACHE = "earth-proofs-images-v1";
 const DATA_URL = "./data.json";
 const CATEGORY_ORDER = ["water", "horizon", "physics", "astronomy", "atmosphere", "geometry", "observation", "navigation", "space", "polar"];
@@ -83,7 +83,8 @@ function getProof(id) {
 }
 
 function getTranslation(proof) {
-  return (proof.translations && proof.translations[state.lang]) || (proof.translations && proof.translations.en) || { title: "", content: "", scientific_note: "" };
+  const packs = proof.translations || {};
+  return packs[state.lang] || packs.ar || packs.en || { title: "", content: "", scientific_note: "" };
 }
 
 function buildSearchText(proof) {
@@ -119,7 +120,7 @@ function applyLanguage(lang, persist) {
   const next = LANGS.indexOf(lang) !== -1 ? lang : "ar";
   state.lang = next;
   document.documentElement.lang = next;
-  document.documentElement.dir = next === "ar" ? "rtl" : "ltr";
+  document.documentElement.dir = (translations[next] && translations[next].dir) || (next === "ar" ? "rtl" : "ltr");
   if (persist !== false) {
     try { localStorage.setItem(LANG_KEY, next); } catch (e) {}
   }
