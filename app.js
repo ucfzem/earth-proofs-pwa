@@ -18,6 +18,9 @@ const state = {
   modalList: [],
   modalIndex: -1,
   lastFocus: null,
+  drawerOpen: false,
+  drawerQuery: "",
+  drawerLastFocus: null,
   download: { visible: false, messageKey: "", done: 0, total: 0, percent: 0 }
 };
 
@@ -179,6 +182,13 @@ function applyTranslations() {
   if (els.categoriesContainer) els.categoriesContainer.setAttribute("aria-label", t("categoryAria"));
   if (els.cardsGrid) els.cardsGrid.setAttribute("aria-label", t("resultsAria"));
   if (els.proofModal) els.proofModal.setAttribute("aria-label", t("modalAria"));
+  if (els.hamburgerBtn) {
+    els.hamburgerBtn.setAttribute("aria-label", t("indexButtonAria"));
+    els.hamburgerBtn.setAttribute("title", t("indexButtonAria"));
+  }
+  if (els.proofsDrawer) els.proofsDrawer.setAttribute("aria-label", t("indexAria"));
+  if (els.drawerSearchInput) els.drawerSearchInput.setAttribute("aria-label", t("indexSearchPlaceholder"));
+  if (els.drawerClose) els.drawerClose.setAttribute("aria-label", t("closeModal"));
   if (els.emptyState && !els.emptyState.hidden) els.emptyState.textContent = t("noResults");
 
   updateConnection();
@@ -187,6 +197,7 @@ function applyTranslations() {
   filterProofs(false);
   refreshDownloadStatus();
   if (state.modalId != null) renderModal();
+  if (state.drawerOpen) renderDrawerList(els.drawerSearchInput ? els.drawerSearchInput.value : "");
 }
 
 function updateConnection() {
@@ -271,8 +282,9 @@ function filterProofs(shouldScroll) {
   }
 }
 
-function openModal(id) {
-  const list = state.filtered.length ? state.filtered : state.proofs;
+function openModal(id, sourceList) {
+  const base = Array.isArray(sourceList) ? sourceList : (state.filtered.length ? state.filtered : state.proofs);
+  const list = base.some((proof) => proof.id === id) ? base : state.proofs;
   const index = list.findIndex((proof) => proof.id === id);
   if (index === -1) return;
   state.modalList = list.map((proof) => proof.id);
@@ -334,6 +346,92 @@ function stepModal(direction) {
   state.modalIndex = nextIndex;
   state.modalId = state.modalList[nextIndex];
   renderModal();
+}
+
+function createDrawerItem(proof) {
+  const tr = getTranslation(proof);
+  const title = tr.title || ("#" + proof.id);
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "drawer-item";
+  button.dataset.id = String(proof.id);
+  button.setAttribute("aria-label", "#" + proof.id + " — " + title);
+  const number = document.createElement("span");
+  number.className = "drawer-item-num";
+  number.textContent = "#" + proof.id;
+  const titleNode = document.createElement("span");
+  titleNode.className = "drawer-item-title";
+  titleNode.textContent = title;
+  button.append(number, titleNode);
+  return button;
+}
+
+function renderDrawerList(filter) {
+  if (!els.drawerList) return;
+  const query = normalize(filter == null ? state.drawerQuery : filter);
+  const items = state.proofs.filter((proof) => {
+    if (!query) return true;
+    const tr = getTranslation(proof);
+    const haystack = [String(proof.id), tr.title || "", categoryLabel(proof.categoryKey)].join(" ");
+    return normalize(haystack).includes(query);
+  });
+  els.drawerList.replaceChildren();
+  if (!items.length) {
+    const empty = document.createElement("p");
+    empty.className = "drawer-empty";
+    empty.textContent = t("indexNoResults");
+    els.drawerList.append(empty);
+    return;
+  }
+  const fragment = document.createDocumentFragment();
+  items.forEach((proof) => fragment.append(createDrawerItem(proof)));
+  els.drawerList.append(fragment);
+}
+
+function openDrawer() {
+  if (!els.proofsDrawer || state.drawerOpen) return;
+  state.drawerOpen = true;
+  state.drawerQuery = "";
+  state.drawerLastFocus = document.activeElement;
+  if (els.drawerSearchInput) els.drawerSearchInput.value = "";
+  els.proofsDrawer.hidden = false;
+  if (els.hamburgerBtn) els.hamburgerBtn.setAttribute("aria-expanded", "true");
+  document.body.style.overflow = "hidden";
+  renderDrawerList("");
+  requestAnimationFrame(() => {
+    if (els.drawerClose) els.drawerClose.focus();
+  });
+}
+
+function closeDrawer(restoreFocus) {
+  if (!els.proofsDrawer) return;
+  els.proofsDrawer.hidden = true;
+  state.drawerOpen = false;
+  state.drawerQuery = "";
+  if (els.drawerSearchInput) els.drawerSearchInput.value = "";
+  if (els.hamburgerBtn) els.hamburgerBtn.setAttribute("aria-expanded", "false");
+  if (state.modalId == null) document.body.style.overflow = "";
+  if (restoreFocus !== false && state.drawerLastFocus && typeof state.drawerLastFocus.focus === "function") {
+    state.drawerLastFocus.focus();
+  }
+  state.drawerLastFocus = null;
+}
+
+function trapFocus(event, container) {
+  if (event.key !== "Tab" || !container) return;
+  const focusable = Array.from(container.querySelectorAll(
+    'button:not([disabled]), input:not([disabled]), [href], [tabindex]:not([tabindex="-1"])'
+  )).filter((node) => node.offsetParent !== null);
+  if (!focusable.length) return;
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  if (event.shiftKey && document.activeElement === first) {
+    event.preventDefault();
+    last.focus();
+  } else if (!event.shiftKey && document.activeElement === last) {
+    event.preventDefault();
+    first.focus();
+  }
 }
 
 function setDownloadStatus(messageKey, done, total, percent) {
@@ -441,7 +539,9 @@ async function loadData() {
     state.proofs = data.map((proof) => Object.assign({}, proof, {
       searchText: buildSearchText(proof)
     })).sort((a, b) => a.id - b.id);
+    renderCategories();
     filterProofs(false);
+    if (state.drawerOpen) renderDrawerList(els.drawerSearchInput ? els.drawerSearchInput.value : "");
     checkImageCache();
   } catch (error) {
     if (els.emptyState) {
@@ -469,6 +569,33 @@ function setupEvents() {
     els.themeToggle.addEventListener("click", () => {
       state.theme = state.theme === "dark" ? "light" : "dark";
       applyTheme();
+    });
+  }
+
+  if (els.hamburgerBtn) els.hamburgerBtn.addEventListener("click", openDrawer);
+  if (els.drawerClose) els.drawerClose.addEventListener("click", () => closeDrawer());
+
+  if (els.proofsDrawer) {
+    els.proofsDrawer.addEventListener("click", (event) => {
+      if (event.target === els.proofsDrawer) closeDrawer();
+    });
+  }
+
+  if (els.drawerSearchInput) {
+    els.drawerSearchInput.addEventListener("input", () => {
+      state.drawerQuery = els.drawerSearchInput.value;
+      renderDrawerList(state.drawerQuery);
+    });
+  }
+
+  if (els.drawerList) {
+    els.drawerList.addEventListener("click", (event) => {
+      const item = event.target.closest("[data-id]");
+      if (!item) return;
+      const id = Number(item.getAttribute("data-id"));
+      if (!Number.isFinite(id)) return;
+      closeDrawer();
+      openModal(id, state.proofs);
     });
   }
 
@@ -535,8 +662,19 @@ function setupEvents() {
   }
 
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && state.modalId != null) closeModal();
+    if (event.key === "Escape") {
+      if (state.modalId != null) {
+        closeModal();
+        return;
+      }
+      if (state.drawerOpen) {
+        closeDrawer();
+        return;
+      }
+    }
+    if (state.drawerOpen) trapFocus(event, els.proofsDrawer);
     if (state.modalId != null && els.proofModal) {
+      trapFocus(event, els.proofModal);
       if (event.key === "ArrowLeft") {
         const direction = document.documentElement.dir === "rtl" ? 1 : -1;
         stepModal(direction);
@@ -562,6 +700,11 @@ function setupEvents() {
 function init() {
   els.langContainer = byId("langContainer");
   els.themeToggle = byId("themeToggle");
+  els.hamburgerBtn = byId("hamburgerBtn");
+  els.proofsDrawer = byId("proofsDrawer");
+  els.drawerClose = byId("drawerClose");
+  els.drawerSearchInput = byId("drawerSearchInput");
+  els.drawerList = byId("drawerList");
   els.connectionStatus = byId("connectionStatus");
   els.searchInput = byId("searchInput");
   els.clearSearchBtn = byId("clearSearchBtn");

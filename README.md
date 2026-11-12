@@ -12,8 +12,10 @@ A multilingual, offline-capable critical-study index of 200 arguments about Eart
 ## Features
 
 - 200 numbered entries across 10 strands
+- Flag-based language pills with RTL/LTR transitions
 - Instant search by number, title, or keyword
 - Category filtering
+- Hamburger index drawer for all 200 proofs with instant filtering
 - Accessible detail modal with previous/next navigation
 - Light and dark themes
 - Installable PWA with offline caching

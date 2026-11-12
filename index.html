@@ -55,6 +55,8 @@
 
         <button id="themeToggle" class="icon-btn" type="button" aria-label="تبديل الوضع الليلي">🌙</button>
 
+        <button id="hamburgerBtn" class="icon-btn" type="button" aria-label="فتح فهرس الأدلة" aria-controls="proofsDrawer" aria-expanded="false" title="فتح فهرس الأدلة">☰</button>
+
         <button id="downloadImagesBtn" class="primary-btn" type="button" data-i18n="downloadImagesBtn">تحميل الصور للعمل دون اتصال</button>
       </div>
     </div>
@@ -86,7 +88,7 @@
   <footer>
     <p><strong data-i18n="title">موسوعة الأدلة الكونية</strong> — <span data-i18n="sourceNote">الملخصات الأصلية لهذا الفهرس صيغت للدراسة النقدية.</span></p>
     <p data-i18n="footerNote">أُعدّ هذا الفهرس كأداة دراسة نقدية.</p>
-    <p class="footer-meta"><span data-i18n="installHint">يمكن تثبيت التطبيق من قائمة المتصفح.</span> · <span class="app-version">v1.0.0</span></p>
+    <p class="footer-meta"><span data-i18n="installHint">يمكن تثبيت التطبيق من قائمة المتصفح.</span> · <span class="app-version">v1.1.0</span></p>
   </footer>
 
   <div id="proofModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
@@ -114,6 +116,21 @@
         <span id="modalCounter" class="modal-counter"></span>
         <button id="nextCardBtn" class="primary-btn" type="button" data-i18n="nextCard">التالي</button>
       </div>
+    </div>
+  </div>
+
+
+  <div id="proofsDrawer" class="drawer-overlay" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" aria-label="فهرس الأدلة" hidden>
+    <div class="drawer-content">
+      <div class="drawer-header">
+        <h3 id="drawerTitle" data-i18n="indexTitle">فهرس الأدلة (1–200)</h3>
+        <button id="drawerClose" class="close-btn" type="button" aria-label="إغلاق">&times;</button>
+      </div>
+      <div class="drawer-search">
+        <label class="sr-only" for="drawerSearchInput" data-i18n="indexSearchPlaceholder">ابحث في الفهرس...</label>
+        <input type="search" id="drawerSearchInput" data-i18n-placeholder="indexSearchPlaceholder" placeholder="ابحث في الفهرس..." autocomplete="off" aria-label="ابحث في الفهرس...">
+      </div>
+      <div id="drawerList" class="drawer-list"></div>
     </div>
   </div>
 
