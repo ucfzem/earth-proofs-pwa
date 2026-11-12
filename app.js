@@ -344,7 +344,7 @@ function renderCards() {
     const snippet = truncate(tr.content || tr.scientific_note || "", 150);
     return '<article class="proof-card" tabindex="0" role="button" data-id="' + proof.id + '" aria-label="' + escapeHTML(title + " — " + t("openProof")) + '">' +
       '<div class="card-image-wrapper">' +
-        '<img src="' + escapeHTML(proof.image_url || "") + '" alt="' + escapeHTML(title) + '" loading="lazy" decoding="async">' +
+        '<img src="' + escapeHTML(proof.image_url || "") + '" alt="' + escapeHTML(title) + '" loading="eager" decoding="async">' +
         '<span class="proof-badge">#' + proof.id + '</span>' +
         '<span class="category-tag">' + escapeHTML(categoryLabel(proof.categoryKey)) + '</span>' +
       '</div>' +

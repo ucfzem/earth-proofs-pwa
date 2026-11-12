@@ -1089,3 +1089,4 @@ html.tv-mode .modal,html.tv-mode .drawer-overlay,html.lite-mode .modal,html.lite
 html.tv-mode a:focus,html.tv-mode button:focus,html.tv-mode input:focus,html.tv-mode select:focus,html.tv-mode [tabindex]:focus,html.lite-mode a:focus,html.lite-mode button:focus,html.lite-mode input:focus,html.lite-mode select:focus,html.lite-mode [tabindex]:focus{outline:3px solid var(--primary-color)!important;outline-offset:3px;box-shadow:none!important}
 html.tv-mode .proof-card:focus,html.lite-mode .proof-card:focus{background:var(--card-hover)!important;border-color:var(--primary-color)!important}
 html.tv-mode .drawer-item:focus,html.lite-mode .drawer-item:focus{background:var(--card-hover)!important}
+html.tv-mode .proof-card,html.lite-mode .proof-card{content-visibility:visible!important;contain-intrinsic-size:auto!important}
