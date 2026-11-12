@@ -1,4 +1,4 @@
-const CACHE = "earth-proofs-shell-v1.1.0";
+const CACHE = "earth-proofs-shell-v1.2.0";
 const SCOPE = self.registration.scope;
 
 const APP_SHELL = [

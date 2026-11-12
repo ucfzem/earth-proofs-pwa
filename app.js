@@ -46,6 +46,41 @@ function categoryLabel(key) {
     (translations.en.categories && translations.en.categories[key]) || key;
 }
 
+function renderLanguageSelector() {
+  if (!els.langContainer) return;
+  const fragment = document.createDocumentFragment();
+  LANGS.forEach((key) => {
+    const pack = translations[key] || {};
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "lang-btn" + (key === state.lang ? " active" : "");
+    button.dataset.lang = key;
+    button.setAttribute("aria-pressed", key === state.lang ? "true" : "false");
+    const label = [pack.name, pack.initial ? "(" + pack.initial + ")" : ""].filter(Boolean).join(" ");
+    button.setAttribute("aria-label", label);
+    button.title = label;
+    const flag = document.createElement("span");
+    flag.className = "lang-flag";
+    flag.setAttribute("aria-hidden", "true");
+    flag.textContent = pack.flag || "";
+    const initial = document.createElement("span");
+    initial.className = "lang-initial";
+    initial.textContent = pack.initial || key.toUpperCase();
+    button.append(flag, initial);
+    fragment.append(button);
+  });
+  els.langContainer.replaceChildren(fragment);
+}
+
+function animateLanguageChange() {
+  const targets = [document.querySelector(".brand-title"), els.cardsGrid].filter(Boolean);
+  targets.forEach((node) => {
+    node.classList.remove("lang-animating");
+    void node.offsetWidth;
+    node.classList.add("lang-animating");
+  });
+}
+
 function escapeHTML(value) {
   return String(value == null ? "" : value).replace(/[&<>"']/g, (char) => ({
     "&": "&amp;",
@@ -124,7 +159,7 @@ function applyLanguage(lang, persist) {
   if (persist !== false) {
     try { localStorage.setItem(LANG_KEY, next); } catch (e) {}
   }
-  if (els.langSelector) els.langSelector.value = next;
+  renderLanguageSelector();
   applyTranslations();
 }
 
@@ -139,6 +174,7 @@ function applyTranslations() {
     if (key) node.setAttribute("placeholder", t(key));
   });
 
+  if (els.langContainer) els.langContainer.setAttribute("aria-label", t("language"));
   if (els.searchInput) els.searchInput.setAttribute("aria-label", t("searchAria"));
   if (els.categoriesContainer) els.categoriesContainer.setAttribute("aria-label", t("categoryAria"));
   if (els.cardsGrid) els.cardsGrid.setAttribute("aria-label", t("resultsAria"));
@@ -418,9 +454,14 @@ async function loadData() {
 }
 
 function setupEvents() {
-  if (els.langSelector) {
-    els.langSelector.addEventListener("change", () => {
-      applyLanguage(els.langSelector.value, true);
+  if (els.langContainer) {
+    els.langContainer.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-lang]");
+      if (!button) return;
+      const lang = button.getAttribute("data-lang");
+      if (!lang || lang === state.lang) return;
+      applyLanguage(lang, true);
+      animateLanguageChange();
     });
   }
 
@@ -519,7 +560,7 @@ function setupEvents() {
 }
 
 function init() {
-  els.langSelector = byId("langSelector");
+  els.langContainer = byId("langContainer");
   els.themeToggle = byId("themeToggle");
   els.connectionStatus = byId("connectionStatus");
   els.searchInput = byId("searchInput");

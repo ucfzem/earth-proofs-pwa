@@ -1,6 +1,9 @@
 const translations = {
   ar: {
     dir: "rtl",
+    name: "العربية",
+    initial: "AR",
+    flag: "🇲🇦",
     title: "موسوعة الأدلة الكونية",
     subtitle: "قراءة تحليلية لـ 200 حجة حول شكل الأرض وحركتها",
     disclaimer: "محتوى تعليمي وتحليلي لأغراض البحث والنقاش الفكري. الحجج معاد صياغتها بأمانة، والملاحظات العلمية توضح السياق السائد ولا تُقدَّم كإجماع مطلق.",
@@ -56,6 +59,9 @@ const translations = {
   },
   en: {
     dir: "ltr",
+    name: "English",
+    initial: "EN",
+    flag: "🇺🇸",
     title: "Cosmic Proofs Encyclopedia",
     subtitle: "A critical reading of 200 arguments about Earth's shape and motion",
     disclaimer: "Educational and analytical content for research and discussion. Arguments are paraphrased fairly; scientific notes explain the mainstream context and are not presented as absolute consensus.",
@@ -111,6 +117,9 @@ const translations = {
   },
   fr: {
     dir: "ltr",
+    name: "Français",
+    initial: "FR",
+    flag: "🇫🇷",
     title: "Encyclopédie des preuves cosmiques",
     subtitle: "Lecture critique de 200 arguments sur la forme et le mouvement de la Terre",
     disclaimer: "Contenu éducatif et analytique destiné à la recherche et au débat. Les arguments sont reformulés loyalement ; les notes scientifiques expliquent le contexte dominant sans être présentées comme un consensus absolu.",
@@ -166,6 +175,9 @@ const translations = {
   },
   es: {
     dir: "ltr",
+    name: "Español",
+    initial: "ES",
+    flag: "🇪🇸",
     title: "Enciclopedia de pruebas cósmicas",
     subtitle: "Lectura crítica de 200 argumentos sobre la forma y el movimiento de la Tierra",
     disclaimer: "Contenido educativo y analítico para investigación y debate. Los argumentos se parafrasean con fidelidad; las notas científicas explican el contexto dominante y no se presentan como un consenso absoluto.",
