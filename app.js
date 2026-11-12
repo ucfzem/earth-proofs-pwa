@@ -25,6 +25,93 @@ const state = {
 };
 
 const els = {};
+const tvMode = document.documentElement.classList.contains("tv-mode");
+
+function tvFocusables(container) {
+  const nodes = container.querySelectorAll(
+    'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+  );
+  return Array.from(nodes).filter((node) => node.offsetParent !== null);
+}
+
+function tvCenter(el) {
+  const rect = el.getBoundingClientRect();
+  return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+}
+
+function tvFindNext(current, key, list) {
+  const from = tvCenter(current);
+  let best = null;
+  let bestScore = Infinity;
+  list.forEach((el) => {
+    if (el === current) return;
+    const to = tvCenter(el);
+    const dx = to.x - from.x;
+    const dy = to.y - from.y;
+    let primary = 0;
+    let secondary = 0;
+    if (key === "ArrowDown") {
+      if (dy <= 8) return;
+      primary = dy;
+      secondary = Math.abs(dx);
+    } else if (key === "ArrowUp") {
+      if (dy >= -8) return;
+      primary = -dy;
+      secondary = Math.abs(dx);
+    } else if (key === "ArrowRight") {
+      if (dx <= 8) return;
+      primary = dx;
+      secondary = Math.abs(dy);
+    } else if (key === "ArrowLeft") {
+      if (dx >= -8) return;
+      primary = -dx;
+      secondary = Math.abs(dy);
+    } else {
+      return;
+    }
+    const score = primary + secondary * 2;
+    if (score < bestScore) {
+      bestScore = score;
+      best = el;
+    }
+  });
+  return best;
+}
+
+function tvReveal(el) {
+  try {
+    el.scrollIntoView({ block: "nearest", inline: "nearest", behavior: "auto" });
+  } catch (error) {
+    el.scrollIntoView(false);
+  }
+}
+
+function setupTvNavigation() {
+  if (!tvMode) return;
+  document.addEventListener("keydown", (event) => {
+    const key = event.key;
+    if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].indexOf(key) === -1) return;
+    if (event.defaultPrevented) return;
+    if (event.target && event.target.matches && event.target.matches("input, textarea, select, [contenteditable='true']")) return;
+    if (state.modalId != null && (key === "ArrowLeft" || key === "ArrowRight")) return;
+    const container = state.modalId != null ? els.proofModal : (state.drawerOpen ? els.proofsDrawer : document);
+    if (!container) return;
+    const list = tvFocusables(container);
+    if (!list.length) return;
+    const current = document.activeElement;
+    if (!current || current === document.body || list.indexOf(current) === -1) {
+      event.preventDefault();
+      list[0].focus();
+      tvReveal(list[0]);
+      return;
+    }
+    const next = tvFindNext(current, key, list);
+    if (!next) return;
+    event.preventDefault();
+    try { next.focus({ preventScroll: true }); } catch (error) { next.focus(); }
+    tvReveal(next);
+  });
+}
 
 function byId(id) {
   return document.getElementById(id);
@@ -270,12 +357,6 @@ function renderCards() {
   }).join("");
 
   if (els.emptyState) els.emptyState.hidden = list.length !== 0;
-  els.cardsGrid.querySelectorAll("img").forEach((img) => {
-    img.addEventListener("error", () => {
-      img.classList.add("image-error");
-      img.alt = "";
-    }, { once: true });
-  });
 }
 
 function filterProofs(shouldScroll) {
@@ -339,13 +420,18 @@ function renderModal() {
 }
 
 function closeModal() {
+  const modalId = state.modalId;
   if (els.proofModal) els.proofModal.hidden = true;
   document.body.style.overflow = "";
   state.modalId = null;
   state.modalIndex = -1;
   state.modalList = [];
-  if (state.lastFocus && typeof state.lastFocus.focus === "function") {
-    state.lastFocus.focus();
+  const card = modalId != null && els.cardsGrid
+    ? els.cardsGrid.querySelector('[data-id="' + modalId + '"]')
+    : null;
+  const restore = card || state.lastFocus;
+  if (restore && typeof restore.focus === "function") {
+    restore.focus();
   }
   state.lastFocus = null;
 }
@@ -410,6 +496,13 @@ function openDrawer() {
   document.body.style.overflow = "hidden";
   renderDrawerList("");
   requestAnimationFrame(() => {
+    if (tvMode) {
+      const first = els.drawerList ? els.drawerList.querySelector(".drawer-item") : null;
+      if (first) {
+        first.focus();
+        return;
+      }
+    }
     if (els.drawerClose) els.drawerClose.focus();
   });
 }
@@ -645,6 +738,12 @@ function setupEvents() {
   }
 
   if (els.cardsGrid) {
+    els.cardsGrid.addEventListener("error", (event) => {
+      const img = event.target;
+      if (!img || img.tagName !== "IMG") return;
+      img.classList.add("image-error");
+      img.alt = "";
+    }, true);
     els.cardsGrid.addEventListener("click", (event) => {
       const card = event.target.closest("[data-id]");
       if (card) openModal(Number(card.getAttribute("data-id")));
@@ -696,6 +795,8 @@ function setupEvents() {
       }
     }
   });
+
+  setupTvNavigation();
 
   window.addEventListener("online", updateConnection);
   window.addEventListener("offline", updateConnection);

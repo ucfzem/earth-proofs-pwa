@@ -74,6 +74,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: var(--bg-color);
   background:
     radial-gradient(circle at 12% -8%, color-mix(in srgb, var(--primary-color) 12%, transparent), transparent 32rem),
     radial-gradient(circle at 88% 0%, color-mix(in srgb, var(--accent-emerald) 8%, transparent), transparent 28rem),
@@ -187,10 +188,10 @@ a {
 header {
   position: relative;
   z-index: 20;
-  background: color-mix(in srgb, var(--card-bg) 92%, transparent);
+  background: var(--card-bg);
+  background: color-mix(in srgb, var(--card-bg) 96%, transparent);
   border-bottom: 1px solid var(--border-color);
   box-shadow: var(--shadow);
-  backdrop-filter: blur(14px);
 }
 
 .header-container {
@@ -497,6 +498,8 @@ main {
   box-shadow: var(--shadow);
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  content-visibility: auto;
+  contain-intrinsic-size: 340px;
 }
 
 .proof-card:hover,
@@ -511,6 +514,7 @@ main {
   position: relative;
   height: 170px;
   overflow: hidden;
+  background: var(--card-bg);
   background:
     linear-gradient(135deg, color-mix(in srgb, var(--primary-color) 18%, var(--card-bg)), var(--card-bg));
 }
@@ -545,7 +549,6 @@ main {
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.03em;
-  backdrop-filter: blur(6px);
 }
 
 [dir="rtl"] .proof-badge {
@@ -569,7 +572,6 @@ main {
   color: #f8fafc;
   font-size: 0.68rem;
   font-weight: 700;
-  backdrop-filter: blur(8px);
 }
 
 [dir="rtl"] .category-tag {
@@ -671,7 +673,6 @@ footer p + p {
   justify-content: center;
   padding: 1rem;
   background: var(--overlay);
-  backdrop-filter: blur(6px);
   animation: fadeIn 0.18s ease;
 }
 
@@ -700,8 +701,8 @@ footer p + p {
   gap: 1rem;
   padding: 1rem 1.25rem;
   border-bottom: 1px solid var(--border-color);
-  background: color-mix(in srgb, var(--card-bg) 94%, transparent);
-  backdrop-filter: blur(12px);
+  background: var(--card-bg);
+  background: color-mix(in srgb, var(--card-bg) 96%, transparent);
 }
 
 .modal-kicker {
@@ -784,6 +785,7 @@ footer p + p {
   padding: 0.9rem 1rem;
   border-radius: 10px;
   border-inline-start: 4px solid var(--accent-color);
+  background: var(--surface-color);
   background: color-mix(in srgb, var(--accent-color) 9%, var(--bg-color));
 }
 
@@ -797,8 +799,8 @@ footer p + p {
   gap: 0.75rem;
   padding: 0.9rem 1.25rem;
   border-top: 1px solid var(--border-color);
-  background: color-mix(in srgb, var(--card-bg) 94%, transparent);
-  backdrop-filter: blur(12px);
+  background: var(--card-bg);
+  background: color-mix(in srgb, var(--card-bg) 96%, transparent);
 }
 
 .modal-counter {
@@ -816,7 +818,6 @@ footer p + p {
   display: flex;
   justify-content: flex-start;
   background: var(--overlay);
-  backdrop-filter: blur(4px);
   animation: fadeIn 0.2s ease;
 }
 
@@ -1066,3 +1067,25 @@ footer p + p {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* --- old phones / Smart TV: lower GPU and paint cost --- */
+@supports not (color: color-mix(in srgb, red 50%, blue)) {
+  body { background: var(--bg-color); }
+  header { background: var(--card-bg); }
+  .primary-btn { background: var(--primary-color); }
+  .primary-btn:hover { background: var(--primary-hover); }
+  .card-image-wrapper { background: var(--card-bg); }
+  .modal-header, .modal-footer { background: var(--card-bg); }
+  .scientific-note { background: var(--surface-color); }
+  .category-tag { background: rgba(4, 9, 18, 0.72); }
+  .modal { background: rgba(5, 7, 10, 0.9); }
+  .drawer-overlay { background: rgba(5, 7, 10, 0.9); }
+}
+html.tv-mode body,html.lite-mode body{background:var(--bg-color)!important}
+html.tv-mode *,html.lite-mode *{animation:none!important;transition:none!important;box-shadow:none!important;backdrop-filter:none!important}
+html.tv-mode .proof-card:hover,html.tv-mode .proof-card:focus-visible,html.lite-mode .proof-card:hover,html.lite-mode .proof-card:focus-visible{transform:none!important}
+html.tv-mode .proof-card:hover .card-image-wrapper img,html.lite-mode .proof-card:hover .card-image-wrapper img{transform:none!important}
+html.tv-mode .modal,html.tv-mode .drawer-overlay,html.lite-mode .modal,html.lite-mode .drawer-overlay{background:rgba(5,7,10,.94)!important}
+html.tv-mode a:focus,html.tv-mode button:focus,html.tv-mode input:focus,html.tv-mode select:focus,html.tv-mode [tabindex]:focus,html.lite-mode a:focus,html.lite-mode button:focus,html.lite-mode input:focus,html.lite-mode select:focus,html.lite-mode [tabindex]:focus{outline:3px solid var(--primary-color)!important;outline-offset:3px;box-shadow:none!important}
+html.tv-mode .proof-card:focus,html.lite-mode .proof-card:focus{background:var(--card-hover)!important;border-color:var(--primary-color)!important}
+html.tv-mode .drawer-item:focus,html.lite-mode .drawer-item:focus{background:var(--card-hover)!important}

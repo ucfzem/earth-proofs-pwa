@@ -33,6 +33,13 @@
       document.documentElement.setAttribute("data-theme", theme);
       document.documentElement.lang = lang;
       document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+      var ua = navigator.userAgent || "";
+      var tv = /Smart-?TV|SMART-TV|Tizen|Web0S|webOS|HbbTV|Roku|AppleTV|GoogleTV|Android TV|BRAVIA|NetCast|Viera|VIDAA|Hisense|Philips TV/i.test(ua) || !!(navigator.userAgentData && navigator.userAgentData.platform === "TV");
+      var mem = navigator.deviceMemory || 4;
+      var cores = navigator.hardwareConcurrency || 4;
+      var saveData = !!(navigator.connection && navigator.connection.saveData);
+      if (tv) document.documentElement.classList.add("tv-mode");
+      if (tv || mem <= 2 || cores <= 2 || saveData) document.documentElement.classList.add("lite-mode");
     })();
   </script>
 </head>
@@ -89,7 +96,7 @@
   <footer>
     <p><strong data-i18n="title">موسوعة الأدلة الكونية</strong> — <span data-i18n="sourceNote">الملخصات الأصلية لهذا الفهرس صيغت للدراسة النقدية.</span></p>
     <p data-i18n="footerNote">أُعدّ هذا الفهرس كأداة دراسة نقدية.</p>
-    <p class="footer-meta"><span data-i18n="installHint">يمكن تثبيت التطبيق من قائمة المتصفح.</span> · <span class="app-version">v1.1.0</span></p>
+    <p class="footer-meta"><span data-i18n="installHint">يمكن تثبيت التطبيق من قائمة المتصفح.</span> · <span class="app-version">v1.2.0</span></p>
   </footer>
 
   <div id="proofModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
@@ -102,7 +109,7 @@
         <button id="modalClose" class="close-btn" type="button" aria-label="إغلاق" title="إغلاق">&times;</button>
       </div>
       <div class="modal-body">
-        <img id="modalImage" src="" alt="" loading="lazy" decoding="async">
+        <img id="modalImage" src="" alt="" loading="lazy" decoding="async" width="1200" height="675">
         <div class="modal-section">
           <h3 data-i18n="claimLabel">الحجة المعروضة</h3>
           <p id="modalContent"></p>
